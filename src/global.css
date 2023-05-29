@@ -1,0 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Gluten:wght@200;400;700&family=Nosifer&family=Reggae+One&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font: 16px;
+}
+
+body {
+  background-image: url("./assets/ttt-bg.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+
+:root {
+  --light-blue: #04c6ff;
+  --pink: #f71daf;
+  --yellow: #ffce01;
+  --dark-bg: #00051b;
+}
