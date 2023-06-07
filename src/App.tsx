@@ -1,16 +1,18 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./pages/Home";
-import Header from "./components/Header";
+import Dashboard from "./pages/Dashboard";
+import Match from "./pages/Match";
 
-const router = createBrowserRouter([{ path: "/", element: <Home /> }]);
+const router = createBrowserRouter([
+  { path: "/", element: <Home /> },
+  { path: "/user", element: <Dashboard /> },
+  { path: "/match", element: <Match /> },
+]);
 
 const App = () => {
   return (
     <>
-      <Header />
-      <main>
-        <RouterProvider router={router} />
-      </main>
+      <RouterProvider router={router} />
     </>
   );
 };

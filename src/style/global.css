@@ -6,16 +6,28 @@
   box-sizing: border-box;
 }
 
+p,
+img,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  user-select: none;
+}
+
 html {
   font: 16px;
 }
 
 body {
-  background-image: url("./assets/ttt-bg.png");
+  background-image: url("../assets/ttt-bg.png");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   height: 100vh;
+  overflow: hidden;
 }
 
 :root {
@@ -23,4 +35,5 @@ body {
   --pink: #f71daf;
   --yellow: #ffce01;
   --dark-bg: #00051b;
+  --light: #fff;
 }

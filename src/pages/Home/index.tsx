@@ -1,51 +1,68 @@
-import styled from "styled-components";
-import BannerImage from "../../assets/ttt-banner.png";
-import { useSpring, animated } from "react-spring";
+import { useTransition } from "react-spring";
+import { useState } from "react";
+import Header from "../../components/Header";
+import { AbsoluteWrapper, MainWrapper } from "./Home.styled";
+import { Button } from "../../style/g_style";
+import LoginIcon from "../../assets/login.png";
+import { useNavigate } from "react-router-dom";
+import AnimatedBanner from "../../components/AnimatedBanner";
+
+type btnDetails = {
+  name: string;
+  delay: number;
+  jump: () => void;
+};
 
 const Home = () => {
-  const banner = useSpring({
-    from: { transform: "translateY(-10px)" },
-    transform: "translateY(10px)",
-    loop: { reverse: true },
-    config: { duration: 3000 },
+  const [showAuth, setShowAuth] = useState<Array<btnDetails>>([]);
+  const navigate = useNavigate();
+
+  const handleNavigate = () => {
+    navigate("/user");
+  };
+
+  const authTransition = useTransition(showAuth, {
+    from: { y: "90vh", scale: 0.1 },
+    enter: (item: btnDetails) => async (next) => {
+      await next({ y: "0vh", delay: item.delay });
+      await next({ scale: 1, delay: item.delay });
+    },
+    leave: { y: "90vh", scale: 0.1 },
   });
+
+  const handleOpenAuth = () => {
+    const len: number = showAuth.length;
+    if (len > 0) {
+      setShowAuth([]);
+      return;
+    }
+    setShowAuth([
+      { name: "Google", delay: len > 0 ? 100 : 50, jump: handleNavigate },
+      { name: "Guest", delay: len > 0 ? 50 : 100, jump: handleNavigate },
+    ]);
+  };
+
   return (
     <>
+      <Header
+        isVerified={false}
+        btnIcon={LoginIcon}
+        isOpen={Boolean(showAuth.length)}
+        setOpen={handleOpenAuth}
+      />
       <MainWrapper>
-        <AnimatedBanner src={BannerImage} style={banner} loading="lazy" />
-        <Button>Start</Button>
+        <AnimatedBanner isFallBack={false} fallback="" />
+        <Button onClick={handleOpenAuth}>Start</Button>
       </MainWrapper>
+      <AbsoluteWrapper>
+        {authTransition((style, item) => (
+          <Button style={style} onClick={item.jump}>
+            {item.name}
+          </Button>
+        ))}
+      </AbsoluteWrapper>
     </>
   );
 };
 
 export default Home;
-
-const MainWrapper = styled.div`
-  padding-top: 10px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-direction: column;
-  height: calc(100vh - 160px);
-  gap: 40px;
-`;
-
-const Banner = styled.img.attrs({ alt: "X" })`
-  height: 450px;
-`;
-
-const AnimatedBanner = animated(Banner);
-
-const Button = styled.button`
-  font-family: "Reggae One", cursive;
-  box-shadow: inset 4px 4px 0px var(--dark-bg),
-    inset -4px -4px 0px var(--dark-bg);
-  padding: 11px 68px;
-  background-color: var(--yellow);
-  border: 4px solid #ffffff;
-  outline: none;
-  cursor: pointer;
-  color: var(--dark-bg);
-  font-size: 1.8rem;
-`;
