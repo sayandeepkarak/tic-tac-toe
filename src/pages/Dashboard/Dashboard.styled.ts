@@ -17,7 +17,7 @@ export const MiddleContentWrapper = styled.div`
   gap: 40px;
 `;
 
-export const InfoBlock = styled.div`
+export const InfoBlock = styled.div<any>`
   position: absolute;
   display: flex;
   flex-direction: column;

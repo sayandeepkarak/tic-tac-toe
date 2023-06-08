@@ -9,7 +9,7 @@ export const GameWrapper = styled.main`
   justify-content: space-evenly;
 `;
 
-export const VsBlock = styled.div`
+export const VsBlock = styled.div<any>`
   height: auto;
   display: flex;
   align-items: center;
@@ -18,6 +18,7 @@ export const VsBlock = styled.div`
 
 type memberProps = {
   direction: "row-reverse" | "row";
+  ref?: any;
 };
 export const MemberBlock = styled.div<memberProps>`
   display: flex;
@@ -26,7 +27,7 @@ export const MemberBlock = styled.div<memberProps>`
   gap: 10px;
 `;
 
-export const RoundBlock = styled.div`
+export const RoundBlock = styled.div<any>`
   display: flex;
   width: 40%;
   justify-content: space-around;
@@ -48,7 +49,7 @@ export const RoundMiddle = styled.div`
   }
 `;
 
-export const GameBlock = styled.div`
+export const GameBlock = styled.div<any>`
   display: grid;
   grid-template-columns: auto auto auto;
   gap: 10px;
@@ -57,7 +58,7 @@ export const GameBlock = styled.div`
 type boxProps = {
   isWinBox: boolean;
 };
-export const Boxes = styled.div<boxProps>`
+export const Boxes = styled.div.attrs({ className: "gameBoxes" })<boxProps>`
   background-color: ${({ isWinBox }) =>
     isWinBox ? "var(--yellow)" : "var(--light)"};
   width: 110px;
@@ -68,6 +69,8 @@ export const Boxes = styled.div<boxProps>`
   font-family: Gluten, cursive;
   font-size: 3.5rem;
   place-items: center;
+  opacity: 0;
+  scale: 0.2;
   transition: all 0.1s linear;
   &:hover {
     scale: 1.1;

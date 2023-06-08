@@ -51,8 +51,12 @@ const Home = () => {
         setOpen={handleOpenAuth}
       />
       <MainWrapper>
-        <AnimatedBanner isFallBack={false} fallback="" />
-        <Button onClick={handleOpenAuth}>Start</Button>
+        <AnimatedBanner
+          isFallBack={false}
+          fallback=""
+          click={handleOpenAuth}
+          btnText="Start"
+        />
       </MainWrapper>
       <AbsoluteWrapper>
         {authTransition((style, item) => (

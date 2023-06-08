@@ -18,7 +18,9 @@ type imgProps = {
   height: String;
 };
 
-export const Image = styled.img.attrs({ alt: "LOGO" })<imgProps>`
+export const Image = styled.img.attrs({
+  alt: "LOGO",
+})<imgProps>`
   height: ${({ height }) => height};
   filter: drop-shadow(-7px 1px 13px black);
 `;

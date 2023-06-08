@@ -1,6 +1,13 @@
-import { useState, useCallback, useEffect } from "react";
+import {
+  useState,
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+} from "react";
 import GameBox from "./GameBox";
 import { GameBlock } from "./Match.styled";
+import { gsap } from "gsap";
 
 type valueType = "X" | "O" | "";
 const wins: Array<Array<number>> = [
@@ -35,6 +42,7 @@ const initialState: state = {
 const Game = ({}: props) => {
   const [{ allValues, finishIndex, isFinish, step, turn }, setState] =
     useState<state>(initialState);
+  const root = useRef();
 
   const checkMatch = useCallback((): boolean => {
     for (let i = 0; i < wins.length; i++) {
@@ -71,21 +79,58 @@ const Game = ({}: props) => {
   };
 
   useEffect(() => {
-    console.log(step);
-    const setReset = () => {
+    if ((step > 4 && checkMatch()) || (step === 9 && !checkMatch())) {
+      const timeline = gsap.timeline();
+      setState((old) => ({ ...old, isFinish: true }));
       setTimeout(() => {
         handleReset();
+        timeline.to(".gameBoxes", {
+          x: "random(-1000,1000)",
+          opacity: 0,
+          stagger: 0.15,
+          scale: 0.2,
+        });
+        timeline.to(".gameBoxes", {
+          x: "0",
+          opacity: 1,
+          stagger: 0.15,
+        });
+        timeline.to(".gameBoxes", {
+          scale: 1,
+        });
       }, 1500);
-    };
-    if ((step > 4 && checkMatch()) || (step === 9 && !checkMatch())) {
-      setState((old) => ({ ...old, isFinish: true }));
-      setReset();
     }
   }, [step]);
 
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      const timeline = gsap.timeline();
+      timeline.fromTo(
+        ".gameBoxes",
+        {
+          x: "random(-1000,1000)",
+          stagger: 0.15,
+        },
+        {
+          delay: 0.5,
+          x: "0",
+          opacity: 1,
+          stagger: 0.15,
+          scale: 0.2,
+        }
+      );
+      timeline.to(".gameBoxes", { scale: 1 });
+    }, root);
+    return () => {
+      console.log("called");
+
+      ctx.kill();
+    };
+  }, []);
+
   return (
     <>
-      <GameBlock>
+      <GameBlock ref={root}>
         {allValues.map((e, i) => {
           return (
             <GameBox

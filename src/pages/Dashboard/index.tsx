@@ -3,7 +3,6 @@ import Header from "../../components/Header";
 import leadIcon from "../../assets/lead.png";
 import { DashboardWrap, MiddleContentWrapper } from "./Dashboard.styled";
 import AnimatedBanner from "../../components/AnimatedBanner";
-import { Button } from "../../style/g_style";
 import UserInfo from "./Status";
 import Leaderboard from "./Leaderboard";
 import { useState } from "react";
@@ -23,7 +22,7 @@ const Dashboard = () => {
     if (!isMatchMaking) {
       setIsMatchMaking(true);
       setTimeout(() => {
-        navigate("/match");
+        // navigate("/match");
       }, 5000);
     } else {
       setIsMatchMaking(false);
@@ -41,10 +40,12 @@ const Dashboard = () => {
       <DashboardWrap>
         <UserInfo />
         <MiddleContentWrapper>
-          <AnimatedBanner isFallBack={isMatchMaking} fallback={<FindLoad />} />
-          <Button onClick={toggleMatchMaking}>
-            {isMatchMaking ? "Cancel" : "Start"}
-          </Button>
+          <AnimatedBanner
+            isFallBack={isMatchMaking}
+            fallback={<FindLoad />}
+            click={toggleMatchMaking}
+            btnText={isMatchMaking ? "Cancel" : "Start"}
+          />
         </MiddleContentWrapper>
         {showLeaders[0] && <Leaderboard isOpen={showLeaders} />}
       </DashboardWrap>
