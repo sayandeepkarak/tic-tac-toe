@@ -10,9 +10,18 @@ type props = {
   isOpen: boolean;
   setOpen: () => void;
   btnIcon: string;
+  name?: string | undefined;
+  image?: string | undefined;
 };
 
-const Header = ({ isOpen, setOpen, btnIcon, isVerified }: props) => {
+const Header = ({
+  isOpen,
+  setOpen,
+  btnIcon,
+  isVerified,
+  name,
+  image,
+}: props) => {
   const root = useRef();
 
   useLayoutEffect(() => {
@@ -28,8 +37,8 @@ const Header = ({ isOpen, setOpen, btnIcon, isVerified }: props) => {
       <Head ref={root}>
         {isVerified ? (
           <InfoRow id="info">
-            <Avatar src="https://lh3.googleusercontent.com/a-/ACNPEu-0g44J4xjgYSZKKJDw9Hcs8xTN9uLXCp9VUgSQ=s96-c" />
-            <InfoText>Sayandeep Karak</InfoText>
+            <Avatar src={image} />
+            <InfoText>{name}</InfoText>
           </InfoRow>
         ) : (
           <Image id="logo" src={Logo} height={"100px"} />

@@ -33,10 +33,12 @@ export const InfoRow = styled.div`
   gap: 10px;
 `;
 
-export const BoardWrap = styled.div`
+export const BoardWrap = styled.div<any>`
   padding: 15px 10px;
   position: absolute;
   height: auto;
+  max-height: 70vh;
+  overflow: hidden;
   width: auto;
   min-height: 50px;
   border: 4px solid var(--yellow);
@@ -45,8 +47,14 @@ export const BoardWrap = styled.div`
   h2 {
     margin-bottom: 20px;
   }
-  table {
-    border-spacing: 0px 10px;
+`;
+
+export const LeadTable = styled.table<any>`
+  border-spacing: 0px 10px;
+  height: 10vh;
+  tr {
+    opacity: 0;
+    transform: translateY(30px);
   }
 `;
 

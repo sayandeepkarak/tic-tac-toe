@@ -1,68 +1,16 @@
+import { useEffect, useState } from "react";
 import { animated, useTransition } from "react-spring";
-import {
-  LeadAvatar,
-  BoardWrap,
-  LeadText,
-  LeaderHead,
-} from "./Dashboard.styled";
-import { Image } from "../../style/g_style";
-import thunderIcon from "../../assets/thunder..png";
+import { BoardWrap, LeadTable, LeaderHead } from "./Dashboard.styled";
+import { leadData } from "../../types/dashboardType";
+import { VITE_REACT_BACKEND_URL } from "../../../config/env";
+import Leaders from "./Leaders";
 
 type props = {
   isOpen: Array<boolean>;
 };
 
-type leadData = {
-  id: number;
-  name: string;
-  points: number;
-};
-
-const data: Array<leadData> = [
-  {
-    id: 1,
-    name: "Sayandeep Karak",
-    points: 30,
-  },
-  {
-    id: 2,
-    name: "Sayandeep Karak",
-    points: 30,
-  },
-  {
-    id: 3,
-    name: "Sayandeep Karak",
-    points: 30,
-  },
-  {
-    id: 4,
-    name: "Sayandeep Karak",
-    points: 30,
-  },
-  {
-    id: 5,
-    name: "Sayandeep Karak",
-    points: 30,
-  },
-  {
-    id: 6,
-    name: "Sayandeep Karak",
-    points: 30,
-  },
-];
-
 const Leaderboard = ({ isOpen }: props) => {
-  const rowTransition = useTransition(data, {
-    from: { y: 20, opacity: 0 },
-    enter: (item) => async (next) => {
-      await next({
-        y: 0,
-        opacity: 1,
-        delay: 150 + data.findIndex((e) => e.id === item.id) * 100,
-      });
-    },
-    leave: { y: 20, opacity: 0 },
-  });
+  const [players, setPlayers] = useState<leadData[]>([]);
 
   const leadTransition = useTransition(isOpen, {
     from: {
@@ -74,34 +22,37 @@ const Leaderboard = ({ isOpen }: props) => {
     config: { duration: 150 },
   });
 
+  useEffect(() => {
+    const getAllPlayers = async () => {
+      try {
+        const res = await fetch(VITE_REACT_BACKEND_URL + "/api/users");
+        if (res.ok) {
+          const data = await res.json();
+          setPlayers(data?.data);
+          setTimeout(() => {
+            console.log(players);
+          }, 1000);
+        }
+      } catch (error) {}
+    };
+    getAllPlayers();
+  }, []);
+
   return (
     <>
       {leadTransition((style) => (
         <BoardWrap as={animated.div} style={style}>
           <LeaderHead>Leaderboard</LeaderHead>
-          <table>
-            <tbody>
-              {rowTransition((style, item) => (
-                <animated.tr style={style}>
-                  <td>
-                    <LeadText>{item.id}</LeadText>
-                  </td>
-                  <td>
-                    <LeadAvatar src="https://lh3.googleusercontent.com/a-/ACNPEu-0g44J4xjgYSZKKJDw9Hcs8xTN9uLXCp9VUgSQ=s96-c" />
-                  </td>
-                  <td>
-                    <LeadText>{item.name}</LeadText>
-                  </td>
-                  <td>
-                    <Image height="20px" src={thunderIcon} />
-                  </td>
-                  <td>
-                    <LeadText>{item.points}</LeadText>
-                  </td>
-                </animated.tr>
-              ))}
-            </tbody>
-          </table>
+          <LeadTable>
+            {/* <tbody>
+              {players.length > 0 &&
+                players.map((e, i) => (
+                  <>
+                    <Leaders key={i} index={i + 1} data={e} />
+                  </>
+                ))}
+            </tbody> */}
+          </LeadTable>
         </BoardWrap>
       ))}
     </>

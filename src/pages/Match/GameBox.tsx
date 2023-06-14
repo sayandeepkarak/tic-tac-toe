@@ -1,19 +1,30 @@
+import { Socket } from "socket.io-client";
 import { Boxes } from "./Match.styled";
 
 type valueType = "X" | "O" | "";
 
 type props = {
   value: valueType;
-  change: (index: number) => void;
   position: number;
   isFinish: boolean;
   finishIndex: number[];
+  socket: Socket;
+  isTurn: boolean;
+  matchId: string;
 };
 
-const GameBox = ({ value, change, position, isFinish, finishIndex }: props) => {
+const GameBox = ({
+  value,
+  position,
+  isFinish,
+  finishIndex,
+  isTurn,
+  socket,
+  matchId,
+}: props) => {
   const handleClick = () => {
-    if (value != "X" && value != "O") {
-      change(position);
+    if (isTurn) {
+      socket.emit("updateSimulation", position, matchId);
     }
   };
 

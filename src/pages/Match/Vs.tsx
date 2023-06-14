@@ -4,10 +4,14 @@ import VsImage from "../../assets/ttt-vs.png";
 import { Expo, gsap } from "gsap";
 import { useLayoutEffect, useRef } from "react";
 
-let url =
-  "https://lh3.googleusercontent.com/a-/ACNPEu-0g44J4xjgYSZKKJDw9Hcs8xTN9uLXCp9VUgSQ=s96-c";
+type props = {
+  users: {
+    names: string[];
+    images: string[];
+  };
+};
 
-const Vs = () => {
+const Vs = ({ users }: Partial<props>) => {
   const root = useRef();
 
   useLayoutEffect(() => {
@@ -23,13 +27,13 @@ const Vs = () => {
     <>
       <VsBlock ref={root}>
         <MemberBlock id="firstBlock" direction="row">
-          <Avatar src={url} />
-          <InfoText>Sayandeep Karak</InfoText>
+          <Avatar src={users?.images[0]} />
+          <InfoText>{users?.names[0]}</InfoText>
         </MemberBlock>
         <Image id="vsImage" height="130px" src={VsImage} />
         <MemberBlock id="secondBlock" direction="row-reverse">
-          <Avatar src={url} />
-          <InfoText>Sayandeep Karak</InfoText>
+          <Avatar src={users?.images[1]} />
+          <InfoText>{users?.names[1]}</InfoText>
         </MemberBlock>
       </VsBlock>
     </>

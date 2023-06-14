@@ -2,7 +2,12 @@ import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { RoundBlock, RoundMiddle } from "./Match.styled";
 
-const Round = () => {
+type props = {
+  points: number[];
+  round: number;
+};
+
+const Round = ({ points, round }: Partial<props>) => {
   const root = useRef("");
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -13,12 +18,12 @@ const Round = () => {
   return (
     <>
       <RoundBlock ref={root}>
-        <p>0</p>
+        <p>{points && points[0]}</p>
         <RoundMiddle>
           <p>Round</p>
-          <p>1</p>
+          <p>{round}</p>
         </RoundMiddle>
-        <p>0</p>
+        <p>{points && points[1]}</p>
       </RoundBlock>
     </>
   );

@@ -5,8 +5,9 @@ export const GameWrapper = styled.main`
   flex-direction: column;
   align-items: center;
   height: 100vh;
-  padding: 25px 10px;
-  justify-content: space-evenly;
+  padding: 40px 10px;
+  gap: 30px;
+  justify-content: start;
 `;
 
 export const VsBlock = styled.div<any>`
@@ -52,7 +53,8 @@ export const RoundMiddle = styled.div`
 export const GameBlock = styled.div<any>`
   display: grid;
   grid-template-columns: auto auto auto;
-  gap: 10px;
+  column-gap: 10px;
+  row-gap: 10px;
 `;
 
 type boxProps = {
@@ -69,9 +71,10 @@ export const Boxes = styled.div.attrs({ className: "gameBoxes" })<boxProps>`
   font-family: Gluten, cursive;
   font-size: 3.5rem;
   place-items: center;
+  transform: translate(0, -200vh);
   opacity: 0;
   scale: 0.2;
-  transition: all 0.1s linear;
+  /* transition: all 0.1s linear; */
   &:hover {
     scale: 1.1;
   }
