@@ -1,0 +1,48 @@
+@import url("https://fonts.googleapis.com/css2?family=Gluten:wght@200;400;700&family=Nosifer&family=Reggae+One&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+p,
+img,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  user-select: none;
+}
+
+html {
+  font: 16px;
+}
+
+body {
+  background-image: url("../assets/ttt-bg.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  overflow: hidden;
+}
+
+:root {
+  --light-blue: #04c6ff;
+  --pink: #f71daf;
+  --yellow: #ffce01;
+  --dark-bg: #00051b;
+  --light: #fff;
+  --success: #5fa052;
+  --error: #e53935;
+}
+
+#root {
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  place-items: center;
+}
