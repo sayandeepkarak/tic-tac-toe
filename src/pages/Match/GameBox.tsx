@@ -11,6 +11,7 @@ type props = {
   socket: Socket;
   isTurn: boolean;
   matchId: string;
+  opponentOffline: boolean;
 };
 
 const GameBox = ({
@@ -21,9 +22,10 @@ const GameBox = ({
   isTurn,
   socket,
   matchId,
+  opponentOffline,
 }: props) => {
   const handleClick = () => {
-    if (isTurn) {
+    if (isTurn && !opponentOffline) {
       socket.emit("updateSimulation", position, matchId);
     }
   };
@@ -33,6 +35,8 @@ const GameBox = ({
       <Boxes
         onClick={handleClick}
         isWinBox={isFinish && finishIndex.includes(position)}
+        isMyTurn={isTurn}
+        isOpponentOffline={opponentOffline}
       >
         {value}
       </Boxes>

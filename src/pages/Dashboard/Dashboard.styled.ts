@@ -44,18 +44,17 @@ export const BoardWrap = styled.div<any>`
   border: 4px solid var(--yellow);
   right: 40px;
   top: 94px;
+  background-color: var(--dark-bg);
   h2 {
     margin-bottom: 20px;
   }
+  opacity: 0;
+  min-width: 339px;
 `;
 
 export const LeadTable = styled.table<any>`
   border-spacing: 0px 10px;
   height: 10vh;
-  tr {
-    opacity: 0;
-    transform: translateY(30px);
-  }
 `;
 
 export const LeaderHead = styled.h2`

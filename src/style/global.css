@@ -36,6 +36,8 @@ body {
   --yellow: #ffce01;
   --dark-bg: #00051b;
   --light: #fff;
+  --success: #5fa052;
+  --error: #e53935;
 }
 
 #root {

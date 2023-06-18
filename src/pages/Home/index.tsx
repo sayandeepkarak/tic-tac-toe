@@ -14,7 +14,6 @@ import Cookie from "js-cookie";
 type btnDetails = {
   name: string;
   delay: number;
-  jump: () => void;
 };
 
 type userDetails = {
@@ -37,34 +36,38 @@ const Home = () => {
     }
   }, []);
 
-  const handleNavigate = useCallback(async () => {
-    const google = new GoogleAuthProvider();
-    try {
-      const res = await signInWithPopup(auth, google);
+  const handleNavigate = useCallback(async (btnType: string) => {
+    if (btnType === "Google") {
+      const google = new GoogleAuthProvider();
+      try {
+        const res = await signInWithPopup(auth, google);
 
-      const newData: userDetails = {
-        displayName: res.user.displayName,
-        email: res.user.email,
-        photoURL: res.user.photoURL,
-        isAnonymous: res.user.isAnonymous,
-        emailVerified: res.user.emailVerified,
-      };
+        const newData: userDetails = {
+          displayName: res.user.displayName,
+          email: res.user.email,
+          photoURL: res.user.photoURL,
+          isAnonymous: res.user.isAnonymous,
+          emailVerified: res.user.emailVerified,
+        };
 
-      if (newData.emailVerified && !newData.isAnonymous) {
-        const res = await fetch(VITE_REACT_BACKEND_URL + "/api/user", {
-          method: "POST",
-          credentials: "include",
-          headers: { "Content-type": "application/json" },
-          body: JSON.stringify(newData),
-        });
-        if (res.ok) {
-          const data = await res.json();
-          console.log(data);
-          navigate("/user");
+        if (newData.emailVerified && !newData.isAnonymous) {
+          const res = await fetch(VITE_REACT_BACKEND_URL + "/api/user", {
+            method: "POST",
+            credentials: "include",
+            headers: { "Content-type": "application/json" },
+            body: JSON.stringify(newData),
+          });
+          if (res.ok) {
+            const data = await res.json();
+            console.log(data);
+            navigate("/user");
+          }
         }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
+    } else {
+      alert("Guest feature isn't implemented");
     }
   }, []);
 
@@ -84,8 +87,8 @@ const Home = () => {
       return;
     }
     setShowAuth([
-      { name: "Google", delay: len > 0 ? 100 : 50, jump: handleNavigate },
-      { name: "Guest", delay: len > 0 ? 50 : 100, jump: handleNavigate },
+      { name: "Google", delay: len > 0 ? 100 : 50 },
+      { name: "Guest", delay: len > 0 ? 50 : 100 },
     ]);
   }, [showAuth]);
 
@@ -107,7 +110,12 @@ const Home = () => {
       </MainWrapper>
       <AbsoluteWrapper>
         {authTransition((style, item) => (
-          <Button style={style} onClick={item.jump}>
+          <Button
+            style={style}
+            onClick={() => {
+              handleNavigate(item.name);
+            }}
+          >
             {item.name}
           </Button>
         ))}

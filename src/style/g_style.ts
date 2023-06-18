@@ -26,8 +26,8 @@ export const Image = styled.img.attrs({
 `;
 
 export const Avatar = styled.img.attrs({ alt: "x" })`
-  border: 4px solid var(--yellow);
   height: 60px;
+  border: 4px solid var(--yellow);
   border-radius: 50%;
 `;
 

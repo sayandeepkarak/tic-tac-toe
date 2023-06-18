@@ -10,3 +10,9 @@ export type leadData = {
   photoURL: string;
   points: number;
 };
+
+export type recoverable = {
+  isRecoverable: boolean;
+  matchId: string;
+  players: string[];
+};

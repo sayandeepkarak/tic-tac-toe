@@ -9,12 +9,14 @@ type props = {
 
 const Round = ({ points, round }: Partial<props>) => {
   const root = useRef("");
+
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from(root.current, { opacity: 0, y: 50 });
     }, root);
     return () => ctx.revert();
   }, []);
+
   return (
     <>
       <RoundBlock ref={root}>

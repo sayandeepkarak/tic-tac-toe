@@ -5,13 +5,15 @@ import { Expo, gsap } from "gsap";
 import { useLayoutEffect, useRef } from "react";
 
 type props = {
-  users: {
+  users?: {
     names: string[];
     images: string[];
   };
+  opponentIndex: number | undefined;
+  isLeft: boolean;
 };
 
-const Vs = ({ users }: Partial<props>) => {
+const Vs = ({ users, opponentIndex, isLeft }: props) => {
   const root = useRef();
 
   useLayoutEffect(() => {
@@ -26,12 +28,20 @@ const Vs = ({ users }: Partial<props>) => {
   return (
     <>
       <VsBlock ref={root}>
-        <MemberBlock id="firstBlock" direction="row">
+        <MemberBlock
+          id="firstBlock"
+          direction="row"
+          left={isLeft && opponentIndex === 0}
+        >
           <Avatar src={users?.images[0]} />
           <InfoText>{users?.names[0]}</InfoText>
         </MemberBlock>
         <Image id="vsImage" height="130px" src={VsImage} />
-        <MemberBlock id="secondBlock" direction="row-reverse">
+        <MemberBlock
+          id="secondBlock"
+          direction="row-reverse"
+          left={isLeft && opponentIndex === 1}
+        >
           <Avatar src={users?.images[1]} />
           <InfoText>{users?.names[1]}</InfoText>
         </MemberBlock>

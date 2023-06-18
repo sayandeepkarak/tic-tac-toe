@@ -15,3 +15,5 @@ export type matchInfo = {
 };
 
 export type valueType = "X" | "O" | "";
+
+export type resultType = boolean | "draw" | null;
