@@ -1,8 +1,9 @@
 import React, { useLayoutEffect } from "react";
-import { Button, Image } from "../../style/g_style";
+import { Button } from "../../style/g_style";
 import { animated, useSpring } from "react-spring";
 import BannerImage from "../../assets/ttt-banner.png";
 import { gsap } from "gsap";
+import { Banner } from "./AnimatedBanner.styled";
 
 type props = {
   isFallBack: boolean;
@@ -38,9 +39,8 @@ const AnimatedBanner = ({ isFallBack, fallback, click, btnText }: props) => {
       {isFallBack ? (
         fallback
       ) : (
-        <Image
+        <Banner
           as={animated.img}
-          height={"450px"}
           src={BannerImage}
           style={banner}
           loading="lazy"

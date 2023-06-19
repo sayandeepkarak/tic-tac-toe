@@ -115,6 +115,7 @@ const Match = () => {
       socket?.off("opponentLeft");
       socket?.off("takeRoomMembers");
       socket?.off("forceFinish");
+      socket?.off("opponentReconnect");
     };
   }, []);
 
