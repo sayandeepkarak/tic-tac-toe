@@ -5,8 +5,12 @@ export const DashboardWrap = styled.main`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - 160px);
+  height: calc(100vh - 110px);
   width: 100%;
+  gap: 40px;
+  @media (max-width: 768px) {
+    gap: 0;
+  }
 `;
 
 export const MiddleContentWrapper = styled.div`
@@ -25,6 +29,9 @@ export const InfoBlock = styled.div<any>`
   gap: 12px;
   left: 46px;
   top: 100px;
+  @media (max-width: 1024px) {
+    left: 36px;
+  }
 `;
 
 export const InfoRow = styled.div`
@@ -50,6 +57,15 @@ export const BoardWrap = styled.div<any>`
   }
   opacity: 0;
   min-width: 339px;
+  @media (max-width: 1024px) {
+    right: 30px;
+  }
+  @media (max-width: 600px) {
+    right: 20px;
+  }
+  @media (max-width: 380px) {
+    right: auto !important;
+  }
 `;
 
 export const LeadTable = styled.table<any>`

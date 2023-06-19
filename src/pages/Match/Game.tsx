@@ -80,6 +80,7 @@ const Game = ({
     });
     return () => {
       socket?.off("finishRound");
+      socket?.off("getRoundWin");
     };
   }, []);
 

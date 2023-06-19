@@ -10,10 +10,11 @@ const userSlice = createSlice({
   },
   reducers: {
     setUserData(state, action) {
-      state.id = action.payload.id;
-      state.name = action.payload.name;
-      state.photoURL = action.payload.photoURL;
-      state.points = action.payload.points;
+      const { id, name, photoURL, points } = action.payload;
+      state.id = id;
+      state.name = name;
+      state.photoURL = photoURL;
+      state.points = points;
     },
   },
 });

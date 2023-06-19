@@ -15,7 +15,7 @@ export const Button = styled(animated.button)`
 `;
 
 type imgProps = {
-  height: String;
+  height?: String;
 };
 
 export const Image = styled.img.attrs({

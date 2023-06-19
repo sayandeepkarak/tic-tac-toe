@@ -41,15 +41,15 @@ const Dashboard = () => {
     if (!recoverStatus.isRecoverable) {
       if (!isMatchMaking) {
         setIsMatchMaking(true);
-        socket.emit("requestMatch");
-        socket.on("successMatchMaking", (matchId: number, users: string[]) => {
+        socket?.emit("requestMatch");
+        socket?.on("successMatchMaking", (matchId: number, users: string[]) => {
           setTimeout(() => {
             navigate(`/match?id=${matchId}&fs=${users[0]}&ss=${users[1]}`);
           }, 1000);
         });
       } else {
-        socket.off("successMatchMaking");
-        socket.emit("cancelMatchMaking");
+        socket?.off("successMatchMaking");
+        socket?.emit("cancelMatchMaking");
         setIsMatchMaking(false);
       }
     } else {
@@ -107,7 +107,7 @@ const Dashboard = () => {
       navigate("/");
     });
 
-    socket.on("newConnection", (players: number) => {
+    socket?.on("newConnection", (players: number) => {
       setActivePlayer(players);
     });
 

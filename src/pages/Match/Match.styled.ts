@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Image } from "../../style/g_style";
 
 export const GameWrapper = styled.main`
   display: flex;
@@ -10,6 +11,13 @@ export const GameWrapper = styled.main`
   justify-content: start;
 `;
 
+export const VersesImage = styled(Image)`
+  height: 130px;
+  @media (max-width: 390px) {
+    height: 100px;
+  }
+`;
+
 export const VsBlock = styled.div<any>`
   height: auto;
   display: flex;
@@ -18,24 +26,33 @@ export const VsBlock = styled.div<any>`
 `;
 
 type memberProps = {
-  direction: "row-reverse" | "row";
+  direction: "left" | "right";
   ref?: any;
   left: boolean;
 };
 export const MemberBlock = styled.div<memberProps>`
   display: flex;
-  flex-direction: ${({ direction }) => direction};
+  flex-direction: ${({ direction }) =>
+    direction === "left" ? "row" : "row-reverse"};
   align-items: center;
   gap: 1.8vh;
   ${({ left }) => left && "filter:grayscale(1)"}
+  @media(max-width:750px) {
+    flex-direction: column;
+    align-items: ${({ direction }) =>
+      direction === "left" ? "flex-start" : "flex-end"};
+    p {
+      ${({ direction }) => direction === "right" && "text-align:right"};
+    }
+  }
 `;
 
 export const RoundBlock = styled.div<any>`
   display: flex;
-  width: 40%;
   justify-content: space-around;
   align-items: center;
   padding: 25px 0px;
+  gap: 30px;
   p {
     color: var(--light);
     font-size: 4rem;

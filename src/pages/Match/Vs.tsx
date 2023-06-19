@@ -1,5 +1,5 @@
-import { Avatar, Image, InfoText } from "../../style/g_style";
-import { MemberBlock, VsBlock } from "./Match.styled";
+import { Avatar, InfoText } from "../../style/g_style";
+import { MemberBlock, VersesImage, VsBlock } from "./Match.styled";
 import VsImage from "../../assets/ttt-vs.png";
 import { Expo, gsap } from "gsap";
 import { useLayoutEffect, useRef } from "react";
@@ -30,16 +30,16 @@ const Vs = ({ users, opponentIndex, isLeft }: props) => {
       <VsBlock ref={root}>
         <MemberBlock
           id="firstBlock"
-          direction="row"
+          direction="left"
           left={isLeft && opponentIndex === 0}
         >
           <Avatar src={users?.images[0]} />
           <InfoText>{users?.names[0]}</InfoText>
         </MemberBlock>
-        <Image id="vsImage" height="130px" src={VsImage} />
+        <VersesImage id="vsImage" height="130px" src={VsImage} />
         <MemberBlock
           id="secondBlock"
-          direction="row-reverse"
+          direction="right"
           left={isLeft && opponentIndex === 1}
         >
           <Avatar src={users?.images[1]} />

@@ -5,8 +5,10 @@ export const MainWrapper = styled.main`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: calc(100vh - 160px);
-  gap: 40px;
+  height: calc(100vh - 110px);
+  @media (max-width: 600px) {
+    gap: 50px;
+  }
 `;
 
 export const AbsoluteWrapper = styled.div`
@@ -16,5 +18,8 @@ export const AbsoluteWrapper = styled.div`
   flex-direction: column;
   gap: 30px;
   padding: 0px 40px;
-  top: 40vh;
+  @media (max-width: 600px) {
+    top: 15vh;
+    right: auto;
+  }
 `;

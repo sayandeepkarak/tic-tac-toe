@@ -43,6 +43,19 @@ body {
 #root {
   height: 100vh;
   width: 100vw;
-  display: grid;
-  place-items: center;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 380px) {
+  #root {
+    min-width: 380px;
+  }
+}
+@media (max-width: 400px) {
+  #root {
+    min-width: 380px;
+  }
 }
