@@ -6,6 +6,6 @@ export const Banner = styled(Image)`
     height: 60vh;
   }
   @media (max-width: 600px) {
-    width: 90vw;
+    width: 90%;
   }
 `;
