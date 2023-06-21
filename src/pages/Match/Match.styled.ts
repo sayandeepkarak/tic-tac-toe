@@ -36,8 +36,8 @@ export const MemberBlock = styled.div<memberProps>`
     direction === "left" ? "row" : "row-reverse"};
   align-items: center;
   gap: 1.8vh;
-  ${({ left }) => left && "filter:grayscale(1)"}
-  @media(max-width:750px) {
+  filter: ${({ left }) => (left ? "grayscale(1)" : "grayscale(0)")};
+  ${({ left }) => left && "filter:grayscale(1)"} @media (max-width: 750px) {
     flex-direction: column;
     align-items: ${({ direction }) =>
       direction === "left" ? "flex-start" : "flex-end"};
@@ -144,6 +144,10 @@ export const TurnIndicator = styled.p`
   right: 40px;
   font-family: "Gluten", cursive;
   font-size: 1.8rem;
+  text-wrap: nowrap;
+  @media (max-width: 600px) {
+    right: auto;
+  }
 `;
 
 export const DisconnectBlock = styled(RoundMiddle)<any>`
