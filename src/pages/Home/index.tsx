@@ -7,7 +7,7 @@ import LoginIcon from "../../assets/login.png";
 import { useNavigate } from "react-router-dom";
 import AnimatedBanner from "../../components/AnimatedBanner";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { auth } from "../../../config/firebase";
+import { auth } from "../../../config/firebase.config";
 import { VITE_REACT_BACKEND_URL } from "../../../config/env";
 import Cookie from "js-cookie";
 
