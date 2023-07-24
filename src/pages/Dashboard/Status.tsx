@@ -30,7 +30,7 @@ const UserInfo = ({ players, points }: props) => {
           <Image height="30px" src={thunderIcon} />
           <InfoText>{points}</InfoText>
         </InfoRow>
-        <InfoText>Online : {players}</InfoText>
+        <InfoText>Online : {players - 1}</InfoText>
       </InfoBlock>
     </>
   );

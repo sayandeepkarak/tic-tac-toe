@@ -43,7 +43,7 @@ export const InfoRow = styled.div`
 export const BoardWrap = styled.div<any>`
   padding: 15px 10px;
   position: absolute;
-  height: auto;
+  height: 70vh;
   max-height: 70vh;
   overflow: hidden;
   width: auto;
@@ -54,6 +54,14 @@ export const BoardWrap = styled.div<any>`
   background-color: var(--dark-bg);
   h2 {
     margin-bottom: 20px;
+  }
+  .leadData {
+    overflow-y: scroll;
+    height: fill-available;
+    padding-bottom: 50px;
+    ::-webkit-scrollbar {
+      display: none;
+    }
   }
   opacity: 0;
   min-width: 339px;

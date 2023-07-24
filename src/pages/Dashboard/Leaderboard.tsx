@@ -32,16 +32,18 @@ const Leaderboard = ({}: props) => {
     <>
       <BoardWrap id="leaderWrapper">
         <LeaderHead>Leaderboard</LeaderHead>
-        <LeadTable>
-          <tbody>
-            {players.length > 0 &&
-              players.map((e, i) => (
-                <>
-                  <Leaders key={i} index={i + 1} data={e} />
-                </>
-              ))}
-          </tbody>
-        </LeadTable>
+        <div className="leadData">
+          <LeadTable>
+            <tbody>
+              {players.length > 0 &&
+                players.map((e, i) => (
+                  <>
+                    <Leaders key={i} index={i + 1} data={e} />
+                  </>
+                ))}
+            </tbody>
+          </LeadTable>
+        </div>
       </BoardWrap>
     </>
   );
